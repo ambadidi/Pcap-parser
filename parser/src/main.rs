@@ -2,12 +2,12 @@ use pcap_file::pcap::PcapReader;
 use std::env;
 use std::fs::File;
 // use std::io::prelude::*;
-//mdf-kospi200.20110216-0.pcap
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     let pcap_file = &args[1];
 
-    // let data_result = File::open("../../mdf-kospi200.20110216-0.pcap");
+    
     let data_result = File::open(pcap_file);
 
     let data_file = match data_result {
