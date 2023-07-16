@@ -80,7 +80,7 @@ fn main() {
             let aqty5_s = std::str::from_utf8(aqty5).expect("invalid utf-8 sequence");
             let aprice5 = &data[144..149];
             let aprice5_s = std::str::from_utf8(aprice5).expect("invalid utf-8 sequence");
-            println!("{} {:x?} {:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?}", res, accept_time_s, issue_code_s, bqty5_s, bprice5_s, bqty4_s, bprice4_s, bqty3_s, bprice3_s, bqty2_s, bprice2_s, bqty1_s, bprice1_s, aqty1_s, aprice1_s, aqty2_s, aprice2_s, aqty3_s, aprice3_s, aqty4_s, aprice4_s, aqty5_s, aprice5_s);
+            println!("{} {} {} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{}", res, accept_time_s, issue_code_s, bqty5_s, bprice5_s, bqty4_s, bprice4_s, bqty3_s, bprice3_s, bqty2_s, bprice2_s, bqty1_s, bprice1_s, aqty1_s, aprice1_s, aqty2_s, aprice2_s, aqty3_s, aprice3_s, aqty4_s, aprice4_s, aqty5_s, aprice5_s);
         }
         i += 1;
         if i == 12 {break;}
