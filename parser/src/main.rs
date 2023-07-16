@@ -19,15 +19,15 @@ fn main() {
     // println!("Data file: {:?}", data_file);
     let mut pcap_reader = PcapReader::new(data_file).unwrap();
     // Read test.pcap
-    let mut i = 0;
+    // let mut i = 0;
     while let Some(pkt) = pcap_reader.next_packet() {
         //Check if there is no error
         let pkt = pkt.unwrap().into_owned();
         //Do something
         let data = &pkt.data[42..];
-        // println!("{:x?}", data);
+        
         let byte_code = &data[..5];
-        // println!("{:x?}", byte_code);
+        
         let s = std::str::from_utf8(byte_code).expect("invalid utf-8 sequence");
         if s == "B6034" {
             let pkt_time = pkt.timestamp;
@@ -82,7 +82,7 @@ fn main() {
             let aprice5_s = std::str::from_utf8(aprice5).expect("invalid utf-8 sequence");
             println!("{} {} {} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{}", res, accept_time_s, issue_code_s, bqty5_s, bprice5_s, bqty4_s, bprice4_s, bqty3_s, bprice3_s, bqty2_s, bprice2_s, bqty1_s, bprice1_s, aqty1_s, aprice1_s, aqty2_s, aprice2_s, aqty3_s, aprice3_s, aqty4_s, aprice4_s, aqty5_s, aprice5_s);
         }
-        i += 1;
-        if i == 12 {break;}
+        // i += 1;
+        // if i == 12 {break;}
     }
 }
