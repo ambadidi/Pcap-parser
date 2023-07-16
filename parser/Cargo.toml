@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 pcap-file = "2.0.0-rc1"
+chrono = "0.4"

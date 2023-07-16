@@ -1,7 +1,8 @@
 use pcap_file::pcap::PcapReader;
 use std::env;
 use std::fs::File;
-// use std::io::prelude::*;
+use chrono::prelude::*;
+
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -30,6 +31,9 @@ fn main() {
         let s = std::str::from_utf8(byte_code).expect("invalid utf-8 sequence");
         if s == "B6034" {
             let pkt_time = pkt.timestamp;
+            let nt = NaiveDateTime::from_timestamp_opt(pkt_time.as_secs() as i64, 0).unwrap();
+            let dt: DateTime<Utc> = DateTime::from_utc(nt, Utc);
+            let res = dt.format("%Y-%m-%d %H:%M:%S");
             let issue_code = &data[5..17];
             let issue_code_s = std::str::from_utf8(issue_code).expect("invalid utf-8 sequence");
             let accept_time = &data[206..214];
@@ -76,7 +80,7 @@ fn main() {
             let aqty5_s = std::str::from_utf8(aqty5).expect("invalid utf-8 sequence");
             let aprice5 = &data[144..149];
             let aprice5_s = std::str::from_utf8(aprice5).expect("invalid utf-8 sequence");
-            println!("{:x?} {:x?} {:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?}", pkt_time, accept_time_s, issue_code_s, bqty5_s, bprice5_s, bqty4_s, bprice4_s, bqty3_s, bprice3_s, bqty2_s, bprice2_s, bqty1_s, bprice1_s, aqty1_s, aprice1_s, aqty2_s, aprice2_s, aqty3_s, aprice3_s, aqty4_s, aprice4_s, aqty5_s, aprice5_s);
+            println!("{} {:x?} {:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?} {:x?}@{:x?}", res, accept_time_s, issue_code_s, bqty5_s, bprice5_s, bqty4_s, bprice4_s, bqty3_s, bprice3_s, bqty2_s, bprice2_s, bqty1_s, bprice1_s, aqty1_s, aprice1_s, aqty2_s, aprice2_s, aqty3_s, aprice3_s, aqty4_s, aprice4_s, aqty5_s, aprice5_s);
         }
         i += 1;
         if i == 12 {break;}
