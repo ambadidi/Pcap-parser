@@ -24,8 +24,21 @@ fn main() {
         let pkt = pkt.unwrap().into_owned();
 
         //Do something
-        println!("{:?}", pkt.timestamp);
+        let data = &pkt.data[42..];
+        // println!("{:x?}", data);
+        let byte_code = &data[..5];
+        // println!("{:x?}", byte_code);
+        let s = std::str::from_utf8(byte_code).expect("invalid utf-8 sequence");
+        if s == "B6034" {
+            let issue_code = &data[5..17];
+            let issue_code_s = std::str::from_utf8(issue_code).expect("invalid utf-8 sequence");
+            let bqty5 = &data[82..89];
+            let bqty5_s = std::str::from_utf8(bqty5).expect("invalid utf-8 sequence");
+            let bprice5 = &data[77..82];
+            let bprice5_s = std::str::from_utf8(bprice5).expect("invalid utf-8 sequence");
+            println!("{:x?} {:x?}@{:x?}", issue_code_s, bqty5_s, bprice5_s);
+        }
         i += 1;
-        if i == 5 {break;}
+        if i == 12 {break;}
     }
 }
