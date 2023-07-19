@@ -5,6 +5,7 @@ use std::fs::File;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+    // let pcap_file = &args[1];
     let mut pcap_file = String::new();
     let mut flag = String::new();
     if args.len() == 2 {
@@ -121,16 +122,26 @@ fn main() {
         }
     }
     if flag == "-r" && !vec_data.is_empty() {
-        let mut indices: Vec<usize> = (0..vec_data[1].len()).collect();
-        let parsed_values: Vec<usize> = vec_data[1]
-            .iter()
-            .map(|x| {
-                x.parse::<usize>()
-                    .expect("cannot parse to number from accept time")
-            })
-            .collect();
-        indices.sort_by_key(|&a| parsed_values[a]);
 
+        let mut indices: Vec<usize> = (0..vec_data[1].len()).collect();
+        
+
+        let  parsed_values: Vec<usize> = vec_data[1]
+            .iter()
+            .map(|x| x.parse::<usize>().expect("cannot parse to number from accept time"))
+            .collect();
+        //parsed_values.sort();
+        indices.sort_by_key(|&a| parsed_values[a]);
+        // for i in 0..vec_data[0].len() {
+        //     println!("{} {}", indices[i], parsed_values[ indices[i]]);
+        // }
+        // for inner_vec in vec_data.iter_mut() {
+        //     let mut temp = inner_vec.clone();
+        //     for (i, &index) in indices.iter().enumerate() {
+        //         temp[i] = inner_vec[index].clone();
+        //     }
+        //     *inner_vec = temp;
+        // }
         for j in 0..vec_data[0].len() {
             let i = indices[j];
             println!(
@@ -160,7 +171,8 @@ fn main() {
                 vec_data[22][i]
             );
         }
-    } else if !vec_data.is_empty() {
+    }
+    else if !vec_data.is_empty() {
         for i in 0..vec_data[0].len() {
             println!(
                 "{} {} {} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{}",
