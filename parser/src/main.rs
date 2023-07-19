@@ -131,8 +131,7 @@ fn main() {
             .collect();
         indices.sort_by_key(|&a| parsed_values[a]);
 
-        for j in 0..vec_data[0].len() {
-            let i = indices[j];
+        for i in indices {
             println!(
                 "{} {} {} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{} {}@{}",
                 vec_data[0][i],
