@@ -121,15 +121,16 @@ fn main() {
         }
     }
     if flag == "-r" && !vec_data.is_empty() {
+        // reorder the indices of accept time
         let mut indices: Vec<usize> = (0..vec_data[1].len()).collect();
-        let parsed_values: Vec<usize> = vec_data[1]
+        let accept_time_to_usize: Vec<usize> = vec_data[1]
             .iter()
             .map(|x| {
                 x.parse::<usize>()
                     .expect("cannot parse to number from accept time")
             })
             .collect();
-        indices.sort_by_key(|&a| parsed_values[a]);
+        indices.sort_by_key(|&a| accept_time_to_usize[a]);
 
         for i in indices {
             println!(
